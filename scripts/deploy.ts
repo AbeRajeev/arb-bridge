@@ -1,20 +1,45 @@
 import { ethers } from "hardhat";
+import * as fs from "fs";
+const hre = require("hardhat");
+
+const deployBridge = async () => {
+  const [signer] = await ethers.getSigners();
+  console.log("Deploying bridge with signer: ", signer.address);
+  console.log("Deploying bridge");
+  const Bridge = await hre.ethers.getContractFactory("GenericBridge");
+  const bridge = await Bridge.deploy();
+  await bridge.deployed();
+  console.log(`Bridge Address: ${bridge.address}`);
+  return { address: bridge.address };
+};
+
+const deployCounter = async (bridgeAddress: string) => {
+  console.log("Deploying counter");
+  const Counter = await hre.ethers.getContractFactory("Counter");
+  const counter = await Counter.deploy(bridgeAddress);
+  await counter.deployed();
+  console.log(`Counter Address: ${counter.address}`);
+  return { address: counter.address };
+};
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  console.log("network", hre.network.name);
+  // deploy bridge
+  const { address: bridgeAddress } = await deployBridge();
+  // deploy coutner
+  const { address: counterAddress } = await deployCounter(bridgeAddress);
 
-  const lockedAmount = ethers.utils.parseEther("1");
+  const info = {
+    network: hre.network.name,
+    bridge: bridgeAddress,
+    counter: counterAddress,
+  };
 
-  const Lock = await ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
-
-  await lock.deployed();
-
-  console.log(`Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`);
+  fs.writeFileSync(
+    `${__dirname}/../deployments/${hre.network.name}.json`,
+    JSON.stringify(info, null, 2)
+  );
 }
-
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
 main().catch((error) => {
