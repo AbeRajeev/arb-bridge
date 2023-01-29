@@ -10,11 +10,13 @@ interface IAMB {
         bytes memory signature
     ) external payable;
 
-    function executeSignatures(
-        address user,
+    function execute(
+        address from,
         address to,
         uint256 value,
+        uint256 nonce,
         bytes memory data,
-        bytes memory signatures
-    ) external payable;
+        uint256 bond,
+        bytes memory signature
+    ) external;
 }

@@ -29,5 +29,20 @@
     "solmate": "^6.6.1",
     "winston": "^3.8.2",
     "yaml": "^2.2.1"
+  },
+  "scripts": {
+    "targetchain": "anvil --chain-id 1600 --port 8546",
+    "prettier": "prettier --write 'contracts/**/*.sol'",
+    "relay:lint": "prettier --write './**/*.ts'",
+    "relay": "npx nodemon --watch relayer relayer/run.ts",
+    "deploy:local": "npx hardhat run scripts/deploy.ts --network local",
+    "deploy:target": "npx hardhat run scripts/deploy.ts --network targetchain",
+    "deploy:goerli": "npx hardhat run scripts/deploy.ts --network goerli",
+    "deploy:opgoerli": "npx hardhat run scripts/deploy.ts --network opgoerli",
+    "deploy:mumbai": "npx hardhat run scripts/deploy.ts --network mumbai",
+    "send:source": "npx hardhat run scripts/send.ts --network local",
+    "send:target": "npx hardhat run scripts/send.ts --network targetchain",
+    "send:goerli": "npx hardhat run scripts/send/goerli.ts --network goerli",
+    "send:mumbai": "npx hardhat run scripts/send/mumbai.ts --network mumbai"
   }
 }

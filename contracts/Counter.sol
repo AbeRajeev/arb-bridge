@@ -16,7 +16,7 @@ contract Counter is Owned {
     }
 
     function increment() public onlyOwner {
-        count++;
+        count += 1;
         emit CounterLatest(count);
     }
 

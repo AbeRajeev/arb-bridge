@@ -4,6 +4,7 @@ import "@nomicfoundation/hardhat-toolbox";
 import { config as dotEnvConfig} from "dotenv";
 import "hardhat-abi-exporter";
 import "hardhat-gas-reporter";
+import { RPC_ENDPOINTS } from "./relayer/utils/constants";
 import path from "path";
 
 const configPath: string = process.env.CONFIG_PATH || ".env";
@@ -49,11 +50,11 @@ const config: HardhatUserConfig = {
       chainId: 1600,
     },
     mumbai: {
-      url: process.env.MUMBAI, //RPC_ENDPOINTS.MUMBAI, // to be changed later 
+      url: RPC_ENDPOINTS.MUMBAI, // to be changed later 
       accounts: [process.env.OWNER_PK || ""],
     },
     goerli: {
-      url: process.env.GOERLI, // RPC_ENDPOINTS.GOERLI,
+      url: RPC_ENDPOINTS.GOERLI,
       accounts: [process.env.OWNER_PK || ""],
     },
   },
