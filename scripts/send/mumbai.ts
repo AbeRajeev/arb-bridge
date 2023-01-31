@@ -38,7 +38,7 @@ async function main(): Promise<void> {
     0, // value
     // NOTE: this is the value that needs to be updated since nonce is a mapping
     // stored in the bridge contract
-    3, // nonce 
+    0, // nonce 
     sigHash, // sighash
     0 // bond
   );

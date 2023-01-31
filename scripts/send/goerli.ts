@@ -36,7 +36,7 @@ async function main(): Promise<void> {
   const hash = await bridge.getMessageHash(
     ethers.utils.getAddress(ADDRESSES.MUMBAI.COUNTER), // i want to execute on contract deployed on matic mumbai
     0, // value,
-    3, //nonce
+    1, //nonce
     sigHash, // sighash
     0 // bond
   );

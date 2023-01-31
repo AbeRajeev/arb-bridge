@@ -15,8 +15,8 @@ contract GenericBridge is Owned {
     constructor() Owned(msg.sender) {}
 
     event RequestForward(
-        address indexed from,
-        address indexed to,
+        address from,
+        address to,
         uint256 value,
         uint256 nonce,
         bytes data,
@@ -25,8 +25,8 @@ contract GenericBridge is Owned {
     );
 
     event RequestSucceeded(
-        address indexed from,
-        address indexed to,
+        address from,
+        address to,
         uint256 value,
         uint256 nonce,
         bytes data,

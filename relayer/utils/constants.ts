@@ -3,8 +3,8 @@ import goerli from "../../deployments/goerli.json";
 import { config } from "dotenv";
 
 export const RPC_ENDPOINTS = {
-  GOERLI: process.env.GOERLI_RPC || "http://localhost:8545",
-  MUMBAI: process.env.MUMBAI_RPC || "http://localhost:8546",
+  GOERLI: process.env.GOERLI_RPC,
+  MUMBAI: process.env.MUMBAI_RPC,
 };
 
 export const ADDRESSES = {
